@@ -159,10 +159,6 @@ def scrape_amazon_product(url):
 
         # Get product name
         product_data['name'] = product_title.get_text().strip()
-        
-        #SEOextractor from name
-        seo_keywords = nlp_utils.extract_keywords(product_data['name'])
-        print(seo_keywords)
 
         # Get product price
         # Try multiple price selectors for different Amazon layouts
@@ -405,7 +401,9 @@ def save_product_data(product_data):
     #   Store a new ProductSnapshot whenever product data is updated
 
         save_product_snapshot(product, price, rating, review_count)
-        print("product name : ", product.name)
+        
+    #   SEO keyword extractor
+        seo_keywords = nlp_utils.extract_keywords(product.name, product.id, product.url)
 
     except ValidationError as e:
         print(f"❌ Validation error: {e}")
@@ -449,11 +447,11 @@ def save_seller(seller_name, seller_url):
 
 def save_product_snapshot(product, price, rating, reviews_count):
     try:
-        print("🔍 Debugging product_data:", json.dumps({
-            "price": price,
-            "rating": rating,
-            "reviews_count": reviews_count  # * Added to verify extraction
-        }, indent=2, default=float))
+        # print("🔍 Debugging product_data:", json.dumps({
+        #     "price": price,
+        #     "rating": rating,
+        #     "reviews_count": reviews_count  # * Added to verify extraction
+        # }, indent=2, default=float))
 
         # * Ensure proper type conversion before saving
         price = float(price) if price is not None else 0.0  # * Handles None values
@@ -478,7 +476,7 @@ def save_product_snapshot(product, price, rating, reviews_count):
             if last_snapshot.reviews_count is not None and review_count is not None:
                 review_count_delta = review_count - last_snapshot.reviews_count
 
-        print("✅ Final Values - Price:", price, "Rating:", rating, "Reviews Count:", review_count)  # * Debug log before saving
+        # print("✅ Final Values - Price:", price, "Rating:", rating, "Reviews Count:", review_count)  # * Debug log before saving
 
         ProductSnapshot.objects.create(
             product=product,

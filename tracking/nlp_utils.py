@@ -4,6 +4,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 import re
 from tracking.models import SEOKeywordTracking
 from tracking.keyword_extraction import get_amazon_suggested_keywords, get_google_trends_keywords
+import json
 
 # Download necessary resources
 nltk.download('stopwords')
@@ -11,7 +12,10 @@ nltk.download('punkt')
 nltk.download('punkt_tab')
 
 # Define function for extracting keywords
-def extract_keywords(text, top_n=5):
+def extract_keywords(text, product, url, top_n=5):
+    product = product
+    name = text
+    url = url
     if not text:
         return []
     
@@ -33,12 +37,30 @@ def extract_keywords(text, top_n=5):
     # Get top N keywords
     keywords = [feature_array[i] for i in tfidf_scores.argsort()[-top_n:][::-1]]
 
-    save_seo_keywords(keywords)
+    save_seo_keywords(keywords, product, name, url)
     #get_google_trends_keywords(keywords)
     #get_amazon_suggested_keywords(keywords)
 
     return keywords
 
-def save_seo_keywords(keywords):
-    return
+def save_seo_keywords(keywords, product, name, url):
+    try:
+        print("Passed value check for keyword : ", keywords)
+        SEO, created = SEOKeywordTracking.objects.update_or_create(
+            product_id = product,
+            product_name = name,
+            product_url = url,
+            top_seo_keywords = json.dumps(keywords)
+        )
+
+        if created:
+            print(f"✅ Keywords saved : ", SEO.top_seo_keywords)
+        else:
+            print(f"🔄 Keywords updated : ", SEO.top_seo_keywords)
+
+    except:
+        print("Inside except block save_seo_keywords")
+        return []
+    
+    return keywords
     

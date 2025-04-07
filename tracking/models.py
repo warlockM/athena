@@ -29,10 +29,10 @@ class ProductSnapshot(models.Model):
 
 
 class SEOKeywordTracking(models.Model):
-    product_id = models.ForeignKey('scrape.product', on_delete=models.CASCADE)
+    product_id = models.ForeignKey('scrape.product', on_delete=models.CASCADE, null=False, default=0)
     product_name = models.CharField(max_length=255)
     product_url = models.URLField()
-    top_seo_keywords = models.JSONField()  # Storing keywords as a list
+    top_seo_keywords = models.JSONField(default=list)  # Storing keywords as a list
     
     created_at = models.DateTimeField(auto_now_add=True)
     
