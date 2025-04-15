@@ -33,7 +33,6 @@ class SEOKeywordTracking(models.Model):
     product_name = models.CharField(max_length=255)
     product_url = models.URLField()
     top_seo_keywords = models.JSONField(default=list)  # Storing keywords as a list
-    
     created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):

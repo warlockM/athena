@@ -30,7 +30,8 @@ DEBUG = os.environ.get("DEBUG")
 
 ALLOWED_HOSTS = [
     "0.0.0.0",
-    "127.0.0.1"
+    "127.0.0.1",
+    "localhost:3000"
 ]
 
 
@@ -44,7 +45,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'scrape',
-    'tracking'
+    'tracking',
+    'api',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -129,3 +132,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SHOPIFY_API_KEY = os.getenv("SHOPIFY_API_KEY")
+SHOPIFY_API_SECRET = os.getenv("SHOPIFY_API_SECRET")
+SHOPIFY_ACCESS_TOKEN = os.getenv("SHOPIFY_ACCESS_TOKEN")
+SHOPIFY_STORE_DOMAIN = os.getenv("SHOPIFY_STORE_DOMAIN")

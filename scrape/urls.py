@@ -22,5 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('scrape/', views.scrape_amazon_product, name="amazon_scraper"),
     path('hello', views.hello, name="hello"),
-    path('tracker/', include("tracking.urls"), name="tracking_data")
+    path('tracker/', include("tracking.urls"), name="tracking_data"),
+    path('api/', include("api.urls"), name="apis"),
+    path('sapi/', include('shopify_integration.urls'), name="shopify"),
+
 ]

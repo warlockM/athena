@@ -5,6 +5,7 @@ import re
 from tracking.models import SEOKeywordTracking
 from tracking.keyword_extraction import get_amazon_suggested_keywords, get_google_trends_keywords
 import json
+from scrape.models import Product
 
 # Download necessary resources
 nltk.download('stopwords')
@@ -46,11 +47,14 @@ def extract_keywords(text, product, url, top_n=5):
 def save_seo_keywords(keywords, product, name, url):
     try:
         print("Passed value check for keyword : ", keywords)
+        
         SEO, created = SEOKeywordTracking.objects.update_or_create(
-            product_id = product,
-            product_name = name,
-            product_url = url,
-            top_seo_keywords = json.dumps(keywords)
+            product_id=Product.objects.get(id=product),
+            defaults={
+                "product_name": name,
+                "product_url": url,
+                "top_seo_keywords": keywords  # ✅ Proper place to pass list
+            }
         )
 
         if created:
@@ -58,8 +62,8 @@ def save_seo_keywords(keywords, product, name, url):
         else:
             print(f"🔄 Keywords updated : ", SEO.top_seo_keywords)
 
-    except:
-        print("Inside except block save_seo_keywords")
+    except Exception as e:
+        print("🚨 Error in save_seo_keywords:", e)
         return []
     
     return keywords
