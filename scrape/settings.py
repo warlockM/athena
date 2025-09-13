@@ -32,7 +32,7 @@ ALLOWED_HOSTS = [
     "0.0.0.0",
     "127.0.0.1",
     "localhost:3000",
-    "https://athena-production-7758.up.railway.app"
+    "athena-production-7758.up.railway.app"
 ]
 
 
