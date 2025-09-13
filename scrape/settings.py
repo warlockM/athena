@@ -113,12 +113,7 @@ DATABASES = {
         'PASSWORD': os.getenv("DB_PASSWORD"),
         'HOST': os.getenv("DB_HOST"),
         'PORT': os.getenv("DB_PORT")
-    },
-    # 'default': dj_database_url.config(
-    #     default=os.environ.get('db.kynetjhwfxwxcjugtuzb.supabase.co', 'postgresql://postgres:Intelligence_orange1234@db.kynetjhwfxwxcjugtuzb.supabase.co:5432/postgres'),
-    #     conn_max_age=600,
-    #     ssl_require=True, # Supabase requires SSL for connections
-    # )
+    }
 }
 
 
