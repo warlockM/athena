@@ -31,7 +31,8 @@ DEBUG = os.environ.get("DEBUG")
 ALLOWED_HOSTS = [
     "0.0.0.0",
     "127.0.0.1",
-    "localhost:3000"
+    "localhost:3000",
+    "https://athena-production-7758.up.railway.app"
 ]
 
 
@@ -66,6 +67,7 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "https://athena-production-7758.up.railway.app"
 ]
 
 CORS_ALLOW_CREDENTIALS = True
