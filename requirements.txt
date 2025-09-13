@@ -28,6 +28,7 @@ pytrends==4.9.2
 pytz==2025.2
 regex==2024.11.6
 requests==2.32.3
+djangorestframework==3.15.1
 scikit-learn==1.6.1
 scipy==1.15.2
 six==1.17.0
