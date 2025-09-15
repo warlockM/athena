@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 from dotenv import load_dotenv
 import os
-import dj_database_url
 
 
 load_dotenv()
@@ -34,7 +33,9 @@ ALLOWED_HOSTS = [
     "0.0.0.0",
     "127.0.0.1",
     "localhost:3000",
-    "athena-production-7758.up.railway.app"
+    "athena-production-7758.up.railway.app",
+    "orangeintelligence.com",
+    "orange-front-git-platformbuilding-warlockms-projects.vercel.app"
 ]
 
 
@@ -69,7 +70,9 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    "https://athena-production-7758.up.railway.app"
+    "https://athena-production-7758.up.railway.app",
+    "https://orangeintelligence.com",
+    "https://orange-front-git-platformbuilding-warlockms-projects.vercel.app"
 ]
 
 CORS_ALLOW_CREDENTIALS = True
